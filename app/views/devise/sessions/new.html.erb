@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <%= link_to root_path, class: 'btn close' do %>
+      <i class="fa fa-close"></i>
+      <% end %>
+      <h3 class="modal-title">Sign In</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <%= render "devise/shared/signin" %>
+        </div>
+      </div>
+      <hr>
+      <div class="text-center text-muted">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
