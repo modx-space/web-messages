@@ -30,9 +30,6 @@ class User < ApplicationRecord
   end
 
   def messages_with_user(u)
-    sends    = messages.where(receiver_id: u.id)
-    receives = u.messages.where(sender_id: id)
-
-    sends + receives
+    Message.between_user(self, u)
   end
 end
