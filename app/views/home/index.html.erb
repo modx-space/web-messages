@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <button class="btn btn-primary" type="button">
+      Messages <span class="badge">10</span>
+    </button>
+    <button class="btn btn-info pull-right" type="button" data-toggle="modal" data-target="#make_friend">
+      Make Friend
+    </button>
+  </div>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Messages</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @friends.each do |friend| %>
+        <tr>
+          <td><%= friend.guest.email %></td>
+          <td>5</td>
+          <td><%= link_to('Cancel Friend', cancel_friend_path(friend), method: :delete) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="make_friend" tabindex="-1" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <%= link_to root_path, class: 'btn close' do %>
+        <i class="fa fa-close"></i>
+        <% end %>
+        <h3 class="modal-title">Make Friend</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <%= form_for(:user, url: make_friend_path, html: {class: 'form-inline'}) do |f| %>
+              <div class="form-group">
+                <%= f.label :Email, class: 'control-label' %>
+                <%= f.text_field :email, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.submit "Send", class: 'btn btn-primary pull-right' %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
