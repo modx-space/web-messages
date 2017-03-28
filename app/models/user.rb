@@ -21,6 +21,8 @@ class User < ApplicationRecord
 
   def send_message(u, msg)
     messages.create(content: msg, receiver_id: u.id, status: 1)
+
+    u.make_friend(self)
   end
 
   def unread_messages
