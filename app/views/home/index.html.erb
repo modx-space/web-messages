@@ -36,7 +36,7 @@
         <% @friends.each do |friend| %>
         <tr>
           <td><%= friend.guest.email %></td>
-          <td>5</td>
+          <td><%= link_to "unread-msg-number", message_index_path(friend.guest) %></td>
           <td><%= link_to('Cancel Friend', cancel_friend_path(friend), method: :delete) %></td>
         </tr>
         <% end %>
