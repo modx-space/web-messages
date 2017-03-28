@@ -1,12 +1,28 @@
 <div class="container">
   <div class="row">
-    <button class="btn btn-primary" type="button">
-      Messages <span class="badge">10</span>
-    </button>
-    <button class="btn btn-info pull-right" type="button" data-toggle="modal" data-target="#make_friend">
-      Make Friend
-    </button>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="<%= root_path %>">Web Messages</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav nav-pills navbar-nav navbar-right">
+            <li class="active">
+              <a>Messages <span class="badge">42</span></a>
+            </li>
+            <li>
+              <a class="btn" type="button" data-toggle="modal" data-target="#make_friend">
+                Make Friend
+              </a>
+            </li>
+            <li><%= link_to "Sign_Out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </div>
+
   <div class="row">
     <table class="table table-hover">
       <thead>
