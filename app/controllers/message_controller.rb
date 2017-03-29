@@ -10,6 +10,11 @@ class MessageController < ApplicationController
     redirect_to message_index_url
   end
 
+  def hide
+    Message.find(params[:id]).update(status: :withdraw)
+    redirect_to message_index_url
+  end
+
   private
   def load_target_user
     params.permit(:user_id)

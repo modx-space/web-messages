@@ -28,26 +28,28 @@
         </div>
         <div class="panel-body">
           <% @all_messages.each do |message| %>
+          <% next if message.withdraw? %>
           <div class="row">
             <% if message.sender_id == @target_user.id %>
-            <div class="alert alert-success text-left col-md-7">
+            <div class="alert alert-success col-md-7"><%= message.content %></div>
             <% else %>
-              <div class="alert alert-info text-right col-md-offset-5">
-                <% end %>
-                <%= message.content %></div>
+            <div class="alert alert-info col-md-7 col-md-offset-5">
+              <%= message.content %>
+              <%= link_to message_hide_path(@target_user, message), class: 'close', method: :delete do %><i class="fa fa-close"></i><% end %>
             </div>
             <% end %>
           </div>
-          <div class="panel-footer text-right">
-            <%= form_for(:msg, url: message_talk_path(@target_user), html: { class: 'form-inline' }) do |f| %>
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-addon">@<%= @target_user.username %></div>
-                <%= f.text_field :content, placeholder: 'Hi', class: 'form-control' %>
-              </div>
-              <%= f.submit "Send", class: 'btn btn-info' %>
-              <% end %>
+          <% end %>
+        </div>
+        <div class="panel-footer text-right">
+          <%= form_for(:msg, url: message_talk_path(@target_user), html: { class: 'form-inline' }) do |f| %>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">@<%= @target_user.username %></div>
+              <%= f.text_field :content, placeholder: 'Hi', class: 'form-control' %>
             </div>
+            <%= f.submit "Send", class: 'btn btn-info' %>
+            <% end %>
           </div>
         </div>
       </div>
