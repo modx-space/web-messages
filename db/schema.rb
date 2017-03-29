@@ -23,11 +23,13 @@ ActiveRecord::Schema.define(version: 20170328095012) do
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",     limit: 65535
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.integer  "status"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "sender_id",                             null: false
+    t.integer  "receiver_id",                           null: false
+    t.integer  "status",                    default: 1, null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id", using: :btree
+    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

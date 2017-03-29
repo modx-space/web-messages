@@ -21,22 +21,22 @@ class User < ApplicationRecord
   end
 
   def send_message(u, msg)
-    sent_messages.create(content: msg, receiver_id: u.id, status: 1)
+    sent_messages.create(content: msg, receiver_id: u.id)
 
     u.make_friend(self)
   end
 
   def unread_messages
-    messages.where(sender_id: active_friends.pluck(:friend_id), status: 1)
+    messages.where(sender_id: active_friends.pluck(:friend_id), status: :unread)
   end
 
   def unread_messages_with_user(u)
-    messages.where(sender_id: u.id, status: 1)
+    messages.where(sender_id: u.id, status: :unread)
   end
 
   def messages_with_user(u)
     all_messages = Message.between_user(self, u)
-    all_messages.where(receiver_id: id).update_all(status: 2)
+    all_messages.where(receiver_id: id).update_all(status: :read)
 
     all_messages
   end
