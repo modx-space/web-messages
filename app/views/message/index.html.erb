@@ -24,29 +24,30 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Messages with @<%= @target_user.username %> [<%= @target_user.email %>]</h3>
+          <h3 class="panel-title">Messages with @<%= @target_user.username %>[<%= @target_user.email %>]</h3>
         </div>
         <div class="panel-body">
           <% @all_messages.each do |message| %>
-            <div class="row">
-              <% if message.sender_id == @target_user.id %>
-              <div class="alert alert-success text-left col-md-7">
-              <% else %>
+          <div class="row">
+            <% if message.sender_id == @target_user.id %>
+            <div class="alert alert-success text-left col-md-7">
+            <% else %>
               <div class="alert alert-info text-right col-md-offset-5">
-              <% end %>
-              <%= message.content %></div>
+                <% end %>
+                <%= message.content %></div>
             </div>
-          <% end %>
-        </div>
-        <div class="panel-footer text-right">
-          <%= form_for(:msg, url: message_talk_path(@target_user), html: { class: 'form-inline' }) do |f| %>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-addon">@<%= @target_user.username %></div>
-              <%= f.text_field :content, placeholder: 'Hi', class: 'form-control' %>
-            </div>
-            <%= f.submit "Send", class: 'btn btn-info' %>
             <% end %>
+          </div>
+          <div class="panel-footer text-right">
+            <%= form_for(:msg, url: message_talk_path(@target_user), html: { class: 'form-inline' }) do |f| %>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">@<%= @target_user.username %></div>
+                <%= f.text_field :content, placeholder: 'Hi', class: 'form-control' %>
+              </div>
+              <%= f.submit "Send", class: 'btn btn-info' %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
