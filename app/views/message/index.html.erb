@@ -10,7 +10,7 @@
           <ul class="nav nav-pills navbar-nav navbar-right">
             <li class="active">
               <a>Messages
-                <span class="badge">42</span>
+                <span class="badge"><%= current_user.unread_messages.size %></span>
               </a>
             </li>
             <li><%= link_to "Sign_Out", destroy_user_session_path, method: :delete %></li>

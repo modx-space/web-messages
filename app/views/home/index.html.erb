@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav nav-pills navbar-nav navbar-right">
             <li class="active">
-              <a>Messages <span class="badge">42</span></a>
+              <a>Messages <span class="badge"><%= current_user.unread_messages.size %></span></a>
             </li>
             <li>
               <a class="btn" type="button" data-toggle="modal" data-target="#make_friend">
@@ -28,7 +28,7 @@
       <thead>
         <tr>
           <th>Username</th>
-          <th>Messages</th>
+          <th>New Messages</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -36,7 +36,9 @@
         <% @friends.each do |friend| %>
         <tr>
           <td><%= friend.guest.email %></td>
-          <td><%= link_to "unread-msg-number", message_index_path(friend.guest) %></td>
+          <td>
+            <%= link_to current_user.unread_messages_with_user(friend.guest).size, message_index_path(friend.guest) %>
+          </td>
           <td><%= link_to('Cancel Friend', cancel_friend_path(friend), method: :delete) %></td>
         </tr>
         <% end %>
