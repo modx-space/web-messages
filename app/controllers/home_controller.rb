@@ -9,13 +9,13 @@ class HomeController < ApplicationController
     user = User.find_by make_friend_params
     current_user.make_friend user if user.present?
 
-    redirect_to home_index_url
+    redirect_to root_url
   end
 
   def cancel_friend
     Friend.find(params[:id]).update(is_active: false)
 
-    redirect_to home_index_url
+    redirect_to root_url
   end
 
   private
